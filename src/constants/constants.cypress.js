@@ -1,0 +1,4 @@
+export const COUNT_CONTRACT_ADDRESS = '0xaa30446FD77b5bF99484ABEE5F9a782eB87e30f5';
+export const ACCESS_KEY_ID = '';
+export const SECRET_ACCESS_KEY = '';
+export const CHAIN_ID = '8217'; // MAINNET: 8217, TESTNET: 1001
