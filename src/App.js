@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import logo from './logo.svg';
 import QRCode from 'qrcode.react';
-import {getBalance, readCount, setCount} from './api/UseCaver';
+import {getBalance, readCount, setCount, readName} from './api/UseCaver';
 import * as KlipAPI from './api/UseKlip';
 import './App.css';
 
@@ -14,6 +14,7 @@ const onPressButton2 = (_balance, _setBalance) => {
 const DEFAULT_QR_CODE = 'DEFAULT';
 
 function App() {
+  const [name, setName] = useState('None');
   const [balance, setBalance] = useState('0');
   const [qrvalue, setQrvalue] = useState(DEFAULT_QR_CODE);
   //readCount();
@@ -23,6 +24,9 @@ function App() {
   }
   const onclickSetCount = () => {
     KlipAPI.setCount(2000, setQrvalue);
+  }
+  const onclickGetName = () => {
+    readName(setName);
   }
   return (
     <div className="App">
@@ -35,9 +39,16 @@ function App() {
           카운트 값 변경
         </button>
         <br /><br /><br />
+        <button onClick={()=>{onclickGetName()}} >
+          이름 가져오기
+        </button>
+        <br /><br /><br />
         <QRCode value={qrvalue} />
         <p>
           {balance}
+        </p>
+        <p>
+          {name}
         </p>
         <a
           className="App-link"

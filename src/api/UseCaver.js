@@ -1,6 +1,6 @@
 import Caver from 'caver-js';
 import CounterABI from '../abi/CounterABI.json';
-import {ACCESS_KEY_ID, SECRET_ACCESS_KEY, COUNT_CONTRACT_ADDRESS, CHAIN_ID, WALLET_PRIVATE_KEY} from '../constants';
+import {ACCESS_KEY_ID, SECRET_ACCESS_KEY, COUNT_CONTRACT_ADDRESS, CHAIN_ID, WALLET_PRIVATE_KEY, NFTSIMPLE_CONTRACT_ADDRESS} from '../constants';
 
 const option = {
     headers: [
@@ -16,6 +16,13 @@ const option = {
 }
 const caver = new Caver(new Caver.providers.HttpProvider("https://node-api.klaytnapi.com/v1/klaytn", option));
 const countContract = new caver.contract(CounterABI, COUNT_CONTRACT_ADDRESS);
+const NFTSimpleContract = new caver.contract(NFTSimpleABI, NFTSIMPLE_CONTRACT_ADDRESS);
+
+export const readName = async (setName) => {
+    const _name = await NFTSimpleContract.methods.name().call();
+    console.log(`name: ${_name}`);
+    setName(_name);
+}
 
 export const readCount = async () => {
     const _count = await countContract.methods.count().call();
